@@ -68,7 +68,8 @@ public func fetchContacts(completionHandler: @escaping (_ result: ContactsFetchR
 
     let contactStore: CNContactStore = CNContactStore()
     var contacts: [CNContact] = [CNContact]()
-    let fetchRequest: CNContactFetchRequest = CNContactFetchRequest(keysToFetch: [CNContactVCardSerialization.descriptorForRequiredKeys()])
+    let fetchRequest: CNContactFetchRequest = CNContactFetchRequest(keysToFetch: [CNContactVCardSerialization.descriptorForRequiredKeys(),
+        CNContactThumbnailImageDataKey as CNKeyDescriptor])
     do {
         try contactStore.enumerateContacts(with: fetchRequest, usingBlock: {
             contact, _ in
@@ -89,7 +90,8 @@ public func fetchContacts(ContactsSortorder sortOrder: CNContactSortOrder, compl
 
     let contactStore: CNContactStore = CNContactStore()
     var contacts: [CNContact] = [CNContact]()
-    let fetchRequest: CNContactFetchRequest = CNContactFetchRequest(keysToFetch: [CNContactVCardSerialization.descriptorForRequiredKeys()])
+    let fetchRequest: CNContactFetchRequest = CNContactFetchRequest(keysToFetch: [CNContactVCardSerialization.descriptorForRequiredKeys(),
+                                                                            CNContactThumbnailImageDataKey as CNKeyDescriptor])
     fetchRequest.unifyResults = true
     fetchRequest.sortOrder = sortOrder
     do {
